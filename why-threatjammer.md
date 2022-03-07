@@ -29,8 +29,8 @@ Although most of these studies have somewhat limited application in "real cyber 
 
 When we face the detection of a threat, we must be aware of the following challenges:
 - What was valid for detecting a threat yesterday may not be valid today: the **time** variable is critical. 
-- Threat detection is a multi-factor problem: A multi-factor assessment function reduces errors, mainly False Positives and Negatives.
-- Data quality is critical. It is more important to have good data than big data.
+- Threat detection is a **multi-factor** problem: A multi-factor assessment function reduces errors, mainly False Positives and Negatives.
+- **Data quality is critical**. It is more important to have good data than big data.
 
 ## What's so special about it?
 
@@ -40,11 +40,11 @@ While I was on my sabbatical, I had the chance to read a paper about how my prev
 
 So the question now was: can I implement a service that automatically pre-assesses the different data sources and then selects the best ones? Can I build a service that learns from the various external inputs and cherrypick the best factors to use in the assessment function?
 
-Well, here's the answer: Welcome to Threat Jammer!
+Well, here's the answer: **Welcome to Threat Jammer!**
 
 ## Threat Jammer in a nutshell
 
-Every company offering a digital service has a different approach to abuse detection because business models are not the same and their needs. Cybercriminals are always thinking about how to exploit the services. It becomes a never-ending cat and mouse game no matter how much a company dedicates to protection from abuse. The response to new ways of exploiting the services must be agile, prompt, and effective.
+Every company offering a digital service has a different approach to abuse detection because business models are not the same and neither their needs. Cybercriminals are always thinking about how to exploit the services. It becomes a never-ending cat and mouse game no matter how much a company dedicates to protection from abuse. The response to new ways of exploiting the services must be agile, prompt, and effective.
 
 **Threat Jammer is a tool for builders.** Threat Jammer is a set of services acting as building blocks of the threat detection strategy of digital companies. We understand how hard it is to find a solution to detect and block malicious activity, and that's why our services are built to solve this problem: **you know what to do; we offer the tools to make it.**
 
@@ -55,7 +55,7 @@ Threat Jammer updates the processes and data to maintain the most accurate and f
 ## The pillars of Threat Jammer
 
 ### OSINT databases
-Open Source Intelligence is a crucial ingredient of any threat intel strategy. The value of Threat Jammer is not just to gather all the different sources and integrate them into a single point of contact. The most relevant value is to categorize them and rank the datasets according to a pre-calculated risk score obtained using different techniques and algorithms transparent to the user.
+Open Source Intelligence is a crucial ingredient of any threat intel strategy. The value of Threat Jammer is not just to gather all the different sources and integrate them into a single point of contact. The most relevant value is to categorize them and rank the datasets according to a pre-calculated risk score obtained using different techniques and algorithms.
 
 ### CSINT databases
 Closed Source Intelligence is an ingredient that increases the quality of any threat intel strategy results. The highest quality and more reliable datasets are often obtained from custom-built extraction processes or directly acquired to external data providers for a fee. Following the same strategy of freshness and accuracy as the OSINT databases, the CSINT databases increase the capacity of our Assessment Engine to detect malicious activity.
@@ -67,7 +67,7 @@ Heuristic Analysis -or rule-based analysis- is a very effective threat intel too
 The amount of data available in the Threat Jammer backend is massive. We have enough data to train different machine learning models to detect malicious activity. Threat Jammer uses the data obtained from OSINT and CSINT sources and the users' behavior, heuristic analysis, and automatic data report to train machine learning models.
 
 ### Crowdsourced Intelligence
-Crowdsourced Intelligence means that our **users can report their data to the Threat Jammer system**. When users feed Threat Jammer with their data using the Report API, they increase the chance of finding malicious activity and reducing the false positives.
+Crowdsourced Intelligence means that our **users can report their data to the Threat Jammer Engines**. When users feed Threat Jammer with their data using the Report API, they increase the chance of finding malicious activity and reducing the false positives.
 
 ## And the future?
 
@@ -75,4 +75,4 @@ Today we start a journey to deliver the best risk assessment tool for the digita
 
 If you want to learn more, you can read the [documentation in our site](https://threatjammer.com/docs)
 
-You can follow us on [Twitter](https://twitter.com/threatjammer) and [Github](https://github.com/threatjammer). Or join our [community in Discord](https://threatjammer.com/community).
+And of course you can follow us on [Twitter](https://twitter.com/threatjammer) and [Github](https://github.com/threatjammer). Or join our [community in Discord](https://threatjammer.com/community).
