@@ -2,8 +2,8 @@
 title: 'Why Threat Jammer?'
 excerpt: 'Threat Jammer is a cloud-based risk assessment platform to identify and mitigate abuse and threats, but why? Follow me in this story.'
 coverImage: '/blogimg/why-threatjammer.png'
-created: '2021-02-16'
-updated: '2021-03-07'
+created: '2022-02-16'
+updated: '2022-03-07'
 readTime: 2
 navigation:
   github: https://github.com/threatjammer/markdown-blog/blob/main/why-threatjammer.md
