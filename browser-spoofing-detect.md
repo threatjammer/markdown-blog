@@ -5,6 +5,7 @@ coverImage: '/blogimg/browser-spoofing-detect.png'
 created: '2022-05-10'
 updated: '2022-05-10'
 readTime: 2
+version: '1.0.0'
 navigation:
   github: https://github.com/threatjammer/markdown-blog/blob/main/browser-spoofing-detect.md
   home: /blog/main
