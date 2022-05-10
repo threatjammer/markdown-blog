@@ -28,7 +28,7 @@ A malicious actor can use this trick to hide their real identity and cover the p
 
 ## The user agent string
 
-A browser's `User-Agent` string (UA) helps identify which browser is used, which version, device, and operating system. When feature detection APIs are unavailable, use the UA to customize behavior or content to specific browser versions. The information that identifies the user agent is transferred to the web server in the HTTP request header. The structure and content of this information of the `user-agent` header are not standardized. Each developer can insert and submit their information. The `User-agent` header was defined in [RFC 2616](https://datatracker.ietf.org/doc/html/rfc2616#section-14.43) and is part of the HTTP protocol.
+A browser's `User-Agent` string (UA) helps identify which browser is used, which version, device, and operating system. The information that identifies the user agent is transferred to the web server in the HTTP request header. The structure and content of this information of the `user-agent` header are not standardized. Each developer can insert and submit their information. The `User-agent` header was defined in [RFC 2616](https://datatracker.ietf.org/doc/html/rfc2616#section-14.43) and is part of the HTTP protocol.
 
 
 The syntax of the `user-agent` header is:
