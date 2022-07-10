@@ -45,11 +45,137 @@ And to minimize too, we also implement the multifactor approach.
 
 ## What are dataset sources?
 
+The datasets is a superset of different sources of data that Threat Jammer classify by the type of suspicious activity they perform. Examples of datasets in July 2022 are:
+
+| Platform datasets | Description |
+| ------------------- | ------ |
+| `ABUSE` | IP addresses reported abusive actions. |
+| `ANONYMOUS_PROXY` | Anonymous Proxy providers. |
+| `ANONYMOUS_VPN` | Anonymous VPN providers. |
+| `BOGONS` | IP addresses and CIDRs of BOGONS. |
+| `FORUM_ACCOUNT_ABUSE` | IP addresses reported abusive actions in public forums. |
+| `REPUTATION` | IP addresses reported malicious actions. |
+| `TOR` | Tor, The Onion Router. |
+
+The datasets can change with the time. They won't change so often as the denylists but it's possible to keep track of the existing [datasets and their details with the User API](https://dublin.api.threatjammer.com/docs#/Data%20sources):
+
+```
+curl -X 'GET' \
+  'https://dublin.api.threatjammer.com/v1/dataset/ip' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer THREATJAMMER_API_KEY'
+```
+
+the list of datasets will return information about the details, type of the resource, if the dataset is enabled and the number of total items:
+
+```
+{
+  "self": "/v1/dataset/ip",
+  "types": [
+    {
+      "self": "/v1/dataset/ip/TOR",
+      "type": "ip",
+      "name": "Tor, The Onion Router",
+      "description": "The Onion Router protocol hides the identity of their users by design",
+      "status": "ENABLED",
+      "items": 2152
+    },
+    ...,
+    {
+      "self": "/v1/dataset/ip/REPUTATION",
+      "type": "ip",
+      "name": "IP addresses reported malicious actions",
+      "description": "This list contains IP addresses found in multiple sources performing malicious actions against all kind of internet services.",
+      "status": "ENABLED",
+      "items": 654893
+    },
+  ]
+}
+```
+
 ## What are the different time ranges for each denylist?
+
+Threat Jammer picks several relevant time frames for each denylist depending on how frequently the data changes. It can range from 1 hour to 365 days. A denylist with a 1-hour time range will contain the resources found in the last hour. A denylist with 365 days time range will include the resources found in the last 365 days. The time ranges are:
+
+| Time ranges| Description |
+| ---------- | ----- |
+| `1H` | Last hour |
+| `6H` | Last six hours |
+| `12H` | Last 12 hours |
+| `1D` | Last 24 hours |
+| `7D` | Last seven days |
+| `30D` | Last 30 days |
+| `90D` | Last 90 days |
+| `180D` | Last 180 days |
+| `365D` | Last 365 days |
+
+Other relevant information about the denylist and time-range combo are:
+- The Dataset it belongs to.
+- Where it was found.
+- How often does it change.
+- The minimum risk and score in the time range.
+- The maximum risk and score in the time range.
+
+The different time ranges helps Threat Jammer to create discrete functions to calculate the risk depending on the *age* of the content of the denylists, as we will see in the next chapters.
+
+To get the details about the denylist for a specific time range the [User API has the Data sources endpoints](https://dublin.api.threatjammer.com/docs#/Data%20sources). To get the information about the `TOR_LIST` in the last hour:
+
+```
+curl -X 'GET' \
+  'https://dublin.api.threatjammer.com/v1/source/ip/TOR_LIST/range/1H' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer THREATJAMMER_API_KEY'
+```
+
+should return the following details.
+
+```
+{
+  "self": "/v1/source/ip/TOR_LIST/range/1H",
+  "source": "/v1/source/ip/TOR_LIST",
+  "lapse": "1H",
+  "items": 1456,
+  "score": 99,
+  "risk": "HIGH",
+  "updated_at": 1657465350426
+}
+```
 
 ## Different OSINT sources for different subscription levels.
 
+Threat Jammer can handle different type of data sources depending on the users' subscription level, but all OSINT sources are available to all users including Freemium accounts. 
+
+Hence, only CSINT and Internal data sources are only available to users with paid subscription level. As a rule of thumb, only data sources we need to pay for them are available to users with a paid subscription.
+
+**During the beta stage of the service, CSINT sources are also available to Freemium users for testing purposes**
+
 ## Why risks are different depending on the denylist and the time range?
+
+The design takes a reductionist approach regarding the risks of each IP address: the risk is not a property of each individual resource, but a property of the combination of the list that the IP address belongs AND how “fresh” the resource is. Hence, the relationship is:
+
+**IP address belongs to a TIME RANGE and it’s part of a LIST with a given RISK.**
+
+There is a time function in this relationship that is not explicit but implicit at design level. Since the risk will always be higher if the time in the list is smaller, we will name this implicit function **DECAY**. The DECAY function will take as arguments the list and the time range. It’s up to our data scientists to determine the slope of the function. 
+
+The tabular representation of the **DECAY** function:
+
+| Risk | List | Time Range | 
+| ---- | ---- | ---------- |
+| 99 | DEBUG_LIST | 1H |
+| 90 | DEBUG_LIST | 6H |
+| 80 | DEBUG_LIST | 12H |
+| 70 | DEBUG_LIST | 1D |
+| 50 | DEBUG_LIST | 7D |
+| 30 | DEBUG_LIST | 30D |
+| 20 | DEBUG_LIST | 90D |
+| 10 | DEBUG_LIST | 180D |
+| 5  | DEBUG_LIST | 365D |
+
+A graphic representation of the function:
+
+
+
+
 
 ## And the future?
 
